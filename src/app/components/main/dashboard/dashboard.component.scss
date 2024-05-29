@@ -1,0 +1,26 @@
+.header{
+display: flex;
+align-items: center;
+justify-content: space-between;
+}
+.position{
+margin-top: 15%;
+  .noRecord{
+  text-align: center;
+  }
+}
+.pointer{
+  cursor: pointer;
+  }
+.color1{
+color:#f1f1d6;
+background-color:#f1f1d6
+}
+.color2{
+color: green;
+  background-color:#b1e3b1
+  }
+.color3{
+color: red;
+  background-color:rgb(228, 154, 154)
+  }

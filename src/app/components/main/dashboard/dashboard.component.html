@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="header">
+    <h3>List</h3>
+    <div>
+      <button class="btn btn-primary" (click)="openForm('','add')">Create</button>
+    </div>
+  </div>
+  <div *ngIf="dataList?.length > 0">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Phone Number</th>
+          <th scope="col">DOB</th>
+          <th scope="col">Status</th>
+          <th scope="col">Address</th>
+          <th scope="col">Acton</th>
+        </tr>
+      </thead>
+      <tbody >
+        <tr *ngFor="let data of dataList; let i = index">
+          <td>{{ data.firstName }}{{ data.lastName }}</td>
+          <td>{{ data.email }}</td>
+          <td>{{ data.phone }}</td>
+
+          <td>{{ data.DOB |date }}</td>
+          <td [ngClass]="{'color3': data.status=='pending', 'color2':data.status=='approved','color1':data.status=='rejected' }"
+          >{{ data.status }}</td>
+          <td>
+            {{data.address?.[0]?.country}}{{data.address?.[0]?.state }}{{data.address?.[0]?.city}}
+          </td>
+          <td><span class="pointer"  (click)="openForm(data,'edit')">Edit </span><span class="pointer" (click)="DeleteItem(data,i)">Delete</span></td>
+        </tr>
+      </tbody>
+
+    </table>
+  </div>
+  <div class="position" *ngIf="dataList?.length == 0">
+    <h3 class="noRecord">No Record Found</h3>
+  </div>
+</div>

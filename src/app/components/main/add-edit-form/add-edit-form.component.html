@@ -1,0 +1,282 @@
+<div class="container">
+  <div>
+    <h3>{{ Pagetype == "add" ? "Add" : "Edit" }} Form</h3>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div>
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              formControlName="firstName"
+              class="form-control"
+              placeholder="First name"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['firstName'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formValid['firstName'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['firstName'].errors['required']">
+                First name is required
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              formControlName="lastName"
+              class="form-control"
+              placeholder="Last name"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['lastName'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formValid['lastName'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['lastName'].errors['required']">
+                Last name is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input
+              type="email"
+              formControlName="email"
+              class="form-control"
+              placeholder="Email"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['email'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formValid['email'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['email'].errors['required']">
+                email is required
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              formControlName="phone"
+              class="form-control"
+              placeholder="Phone Number"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['phone'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formValid['phone'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['phone'].errors['required']">
+                Phone is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <!-- <input
+              type="text"
+              formControlName="DOB"
+              class="form-control"
+              placeholder="DOB"
+            /> -->
+            <mat-form-field class="example-full-width">
+              <mat-label>Choose a date</mat-label>
+              <input
+                matInput
+                [matDatepicker]="picker"
+                formControlName="DOB"
+                [ngClass]="{
+                  'is-invalid': submitted && formValid['DOB'].errors
+                }"
+              />
+              <mat-hint>MM/DD/YYYY</mat-hint>
+              <mat-datepicker-toggle
+                matIconSuffix
+                [for]="picker"
+              ></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div
+              *ngIf="submitted && formValid['DOB'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['DOB'].errors['required']">
+                DOB is required
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <select
+              name="selectedQuantity"
+              id="status"
+              class="form-control"
+              formControlName="status"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['status'].errors
+              }"
+            >
+              <option value="" disabled>Status</option>
+
+              <option *ngFor="let option of options" [value]="option.value">
+                {{ option.title }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && formValid['status'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['status'].errors['required']">
+                Status is required
+              </div>
+            </div>
+            <!-- <input
+              type="text"
+              formControlName="status"
+              class="form-control"
+              placeholder="Status"
+            /> -->
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <input
+              type="text"
+              formControlName="password"
+              class="form-control"
+              placeholder="Password"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['password'].errors
+              }"
+            />
+            <div
+              *ngIf="submitted && formValid['password'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['password'].errors['required']">
+                Password is required
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <input
+              type="text"
+              formControlName="confirmPassword"
+              class="form-control"
+              placeholder="Confirem Password"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['confirmPassword'].errors
+              }"
+            />
+          </div>
+          <div
+            *ngIf="submitted && formValid['confirmPassword'].errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="formValid['confirmPassword'].errors['required']">
+              ConfirmPassword is required
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+            <select
+              name="selectedCountry"
+              id="country"
+              class="form-control"
+              formControlName="country"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['country'].errors
+              }"
+            >
+              <option value="" disabled>Country</option>
+
+              <option [value]="'india'">India</option>
+            </select>
+            <div
+              *ngIf="submitted && formValid['country'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['country'].errors['required']">
+                Country is required
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <select
+              name="selectedstate"
+              id="state"
+              class="form-control"
+              formControlName="state"
+              (change)="SelectedState($event)"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['state'].errors
+              }"
+            >
+              <option value="" disabled>State</option>
+              <option
+                *ngFor="let state of states; let i = index"
+                [value]="state.name"
+              >
+                {{ state.name }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && formValid['state'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['state'].errors['required']">
+                State is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <select
+              name="selectedstate"
+              id="city"
+              class="form-control"
+              formControlName="city"
+              [ngClass]="{
+                'is-invalid': submitted && formValid['city'].errors
+              }"
+            >
+              <option value="" disabled>City</option>
+              <option
+                *ngFor="let city of cities; let i = index"
+                [value]="city"
+              >
+                {{ city }}
+              </option>
+            </select>
+            <div
+              *ngIf="submitted && formValid['city'].errors"
+              class="invalid-feedback"
+            >
+              <div *ngIf="formValid['city'].errors['required']">
+                City is required
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <button type="submit" class="btn btn-success btn-submit">
+            {{ Pagetype == "add" ? "Submit" : "Update" }}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
